@@ -16,7 +16,9 @@
     "isolatedModules": true,
     "jsx": "preserve",
     "paths": {
-      "@api/*": ["api/*"]
+      "@api/*": ["api/*"],
+      "@component/*": ["component/*"],
+      "@lib/*": ["lib/*"]
     },
     "noImplicitAny": false,
     "noUnusedLocals": true,
