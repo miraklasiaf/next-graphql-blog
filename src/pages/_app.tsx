@@ -3,7 +3,7 @@ import { AppProps } from "next/app";
 import Head from "next/head";
 import { ApolloProvider } from "@apollo/react-hooks";
 import { useApollo } from "@lib/apolloClient";
-import Nprogress from "@component/nprogress";
+import Nprogress from "@components/nprogress";
 
 function App({ Component, pageProps }: AppProps) {
   const apolloClient = useApollo(pageProps.initialApolloState);

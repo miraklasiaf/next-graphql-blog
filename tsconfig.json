@@ -17,7 +17,7 @@
     "jsx": "preserve",
     "paths": {
       "@api/*": ["api/*"],
-      "@component/*": ["component/*"],
+      "@components/*": ["components/*"],
       "@lib/*": ["lib/*"]
     },
     "noImplicitAny": false,
