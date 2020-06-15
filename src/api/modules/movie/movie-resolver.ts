@@ -1,6 +1,4 @@
 import { Resolver, Arg, Mutation, Int, Query, Ctx } from "type-graphql";
-import { MovieUpdateInput } from "./input/movie-update-input";
-import { MovieInput } from "./input/movie-input";
 import { Movie } from "./movie-entity";
 import { AppContext } from "@api/types";
 
@@ -23,20 +21,21 @@ export class MovieResolver {
 
   @Mutation(() => Movie)
   async createMovie(
-    @Arg("data", () => MovieInput) data: MovieInput,
+    @Arg("title", () => String) title: string,
+    @Arg("minutes", () => Int) minutes: number,
     @Ctx() ctx: AppContext
   ) {
-    return ctx.movieService.create(data);
+    return ctx.movieService.create(title, minutes);
   }
 
   @Mutation(() => Boolean)
   async updateMovie(
+    @Ctx() ctx: AppContext,
     @Arg("movieId", () => Int) movieId: number,
-    @Arg("data", () => MovieUpdateInput) data: MovieUpdateInput,
-    @Ctx() ctx: AppContext
+    @Arg("title", () => String, { nullable: true }) title?: string,
+    @Arg("minutes", () => Int, { nullable: true }) minutes?: number
   ) {
-    await ctx.movieService.update(movieId, data);
-    return true;
+    return ctx.movieService.update(movieId, title, minutes);
   }
 
   @Mutation(() => Boolean)
@@ -44,7 +43,6 @@ export class MovieResolver {
     @Arg("movieId", () => Int) movieId: number,
     @Ctx() ctx: AppContext
   ) {
-    await ctx.movieService.delete(movieId);
-    return true;
+    return ctx.movieService.delete(movieId);
   }
 }

@@ -42,28 +42,20 @@ export type Mutation = {
 
 
 export type MutationCreateMovieArgs = {
-  data: MovieInput;
+  minutes: Scalars['Int'];
+  title: Scalars['String'];
 };
 
 
 export type MutationUpdateMovieArgs = {
-  data: MovieUpdateInput;
+  minutes?: Maybe<Scalars['Int']>;
+  title?: Maybe<Scalars['String']>;
   movieId: Scalars['Int'];
 };
 
 
 export type MutationDeleteMovieArgs = {
   movieId: Scalars['Int'];
-};
-
-export type MovieInput = {
-  title: Scalars['String'];
-  minutes: Scalars['Int'];
-};
-
-export type MovieUpdateInput = {
-  title?: Maybe<Scalars['String']>;
-  minutes?: Maybe<Scalars['Int']>;
 };
 
 export type GetMoviesQueryVariables = Exact<{ [key: string]: never; }>;
@@ -90,9 +82,35 @@ export type GetMovieQuery = (
   ) }
 );
 
+export type CreateMovieMutationVariables = Exact<{
+  title: Scalars['String'];
+  minutes: Scalars['Int'];
+}>;
+
+
+export type CreateMovieMutation = (
+  { __typename?: 'Mutation' }
+  & { createMovie: (
+    { __typename?: 'Movie' }
+    & Pick<Movie, 'id' | 'title' | 'minutes'>
+  ) }
+);
+
+export type UpdateMovieMutationVariables = Exact<{
+  movieId: Scalars['Int'];
+  title: Scalars['String'];
+  minutes: Scalars['Int'];
+}>;
+
+
+export type UpdateMovieMutation = (
+  { __typename?: 'Mutation' }
+  & Pick<Mutation, 'updateMovie'>
+);
+
 
 export const GetMoviesDocument = gql`
-    query getMovies {
+    query GetMovies {
   movies {
     id
     title
@@ -126,7 +144,7 @@ export type GetMoviesQueryHookResult = ReturnType<typeof useGetMoviesQuery>;
 export type GetMoviesLazyQueryHookResult = ReturnType<typeof useGetMoviesLazyQuery>;
 export type GetMoviesQueryResult = ApolloReactCommon.QueryResult<GetMoviesQuery, GetMoviesQueryVariables>;
 export const GetMovieDocument = gql`
-    query getMovie($movieId: Int!) {
+    query GetMovie($movieId: Int!) {
   movie(movieId: $movieId) {
     id
     title
@@ -160,3 +178,70 @@ export function useGetMovieLazyQuery(baseOptions?: ApolloReactHooks.LazyQueryHoo
 export type GetMovieQueryHookResult = ReturnType<typeof useGetMovieQuery>;
 export type GetMovieLazyQueryHookResult = ReturnType<typeof useGetMovieLazyQuery>;
 export type GetMovieQueryResult = ApolloReactCommon.QueryResult<GetMovieQuery, GetMovieQueryVariables>;
+export const CreateMovieDocument = gql`
+    mutation CreateMovie($title: String!, $minutes: Int!) {
+  createMovie(title: $title, minutes: $minutes) {
+    id
+    title
+    minutes
+  }
+}
+    `;
+export type CreateMovieMutationFn = ApolloReactCommon.MutationFunction<CreateMovieMutation, CreateMovieMutationVariables>;
+
+/**
+ * __useCreateMovieMutation__
+ *
+ * To run a mutation, you first call `useCreateMovieMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useCreateMovieMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [createMovieMutation, { data, loading, error }] = useCreateMovieMutation({
+ *   variables: {
+ *      title: // value for 'title'
+ *      minutes: // value for 'minutes'
+ *   },
+ * });
+ */
+export function useCreateMovieMutation(baseOptions?: ApolloReactHooks.MutationHookOptions<CreateMovieMutation, CreateMovieMutationVariables>) {
+        return ApolloReactHooks.useMutation<CreateMovieMutation, CreateMovieMutationVariables>(CreateMovieDocument, baseOptions);
+      }
+export type CreateMovieMutationHookResult = ReturnType<typeof useCreateMovieMutation>;
+export type CreateMovieMutationResult = ApolloReactCommon.MutationResult<CreateMovieMutation>;
+export type CreateMovieMutationOptions = ApolloReactCommon.BaseMutationOptions<CreateMovieMutation, CreateMovieMutationVariables>;
+export const UpdateMovieDocument = gql`
+    mutation UpdateMovie($movieId: Int!, $title: String!, $minutes: Int!) {
+  updateMovie(movieId: $movieId, title: $title, minutes: $minutes)
+}
+    `;
+export type UpdateMovieMutationFn = ApolloReactCommon.MutationFunction<UpdateMovieMutation, UpdateMovieMutationVariables>;
+
+/**
+ * __useUpdateMovieMutation__
+ *
+ * To run a mutation, you first call `useUpdateMovieMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useUpdateMovieMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [updateMovieMutation, { data, loading, error }] = useUpdateMovieMutation({
+ *   variables: {
+ *      movieId: // value for 'movieId'
+ *      title: // value for 'title'
+ *      minutes: // value for 'minutes'
+ *   },
+ * });
+ */
+export function useUpdateMovieMutation(baseOptions?: ApolloReactHooks.MutationHookOptions<UpdateMovieMutation, UpdateMovieMutationVariables>) {
+        return ApolloReactHooks.useMutation<UpdateMovieMutation, UpdateMovieMutationVariables>(UpdateMovieDocument, baseOptions);
+      }
+export type UpdateMovieMutationHookResult = ReturnType<typeof useUpdateMovieMutation>;
+export type UpdateMovieMutationResult = ApolloReactCommon.MutationResult<UpdateMovieMutation>;
+export type UpdateMovieMutationOptions = ApolloReactCommon.BaseMutationOptions<UpdateMovieMutation, UpdateMovieMutationVariables>;
