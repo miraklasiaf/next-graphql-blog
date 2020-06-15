@@ -1,5 +1,4 @@
 import { createConnection, getConnection } from "typeorm";
-
 import * as Movie from "../modules/movie/movie-entity";
 
 export default async function () {
