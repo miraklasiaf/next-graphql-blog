@@ -18,7 +18,8 @@
     "paths": {
       "@api/*": ["api/*"],
       "@components/*": ["components/*"],
-      "@lib/*": ["lib/*"]
+      "@lib/*": ["lib/*"],
+      "@graphql/*": ["graphql/*"]
     },
     "noImplicitAny": false,
     "noUnusedLocals": true,
@@ -34,10 +35,5 @@
     "noImplicitThis": true
   },
   "exclude": ["node_modules"],
-  "include": [
-    "next-env.d.ts",
-    "**/*.ts",
-    "**/*.tsx",
-    "src/api/service/firebase/admin.js"
-  ]
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"]
 }

@@ -30,9 +30,6 @@
     "typeorm": "^0.2.25",
     "typescript": "^3.9.5"
   },
-  "resolutions": {
-    "tslib": "^1 <1.12.0 || ^1.13.0"
-  },
   "devDependencies": {
     "@babel/plugin-proposal-decorators": "^7.10.1",
     "@graphql-codegen/add": "^1.15.3",
@@ -44,5 +41,8 @@
     "@types/microrouter": "^3.1.1",
     "@types/node": "^14.0.13",
     "@types/react": "^16.9.36"
+  },
+  "resolutions": {
+    "tslib": "^1 <1.12.0 || ^1.13.0"
   }
 }
