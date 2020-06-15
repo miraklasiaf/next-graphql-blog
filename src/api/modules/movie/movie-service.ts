@@ -1,7 +1,5 @@
 import { Connection, Repository } from "typeorm";
 import { Movie } from "./movie-entity";
-import { MovieInput } from "./input/movie-input";
-import { MovieUpdateInput } from "./input/movie-update-input";
 
 export class MovieService {
   movieRepository: Repository<Movie>;
@@ -18,22 +16,31 @@ export class MovieService {
     return this.movieRepository.findOne(movieId);
   }
 
-  async create(data: MovieInput): Promise<Movie> {
+  async create(title: string, minutes: number): Promise<Movie> {
     const newMovie = new Movie();
 
-    newMovie.title = data.title;
-    newMovie.minutes = data.minutes;
+    newMovie.title = title;
+    newMovie.minutes = minutes;
 
     const createdMovie = await this.movieRepository.save(newMovie);
 
     return createdMovie;
   }
 
-  async update(movieId: number, data: MovieUpdateInput) {
-    await this.movieRepository.update({ movieId }, data);
+  async update(movieId: number, title?: string, minutes?: number) {
+    const updatedMovie = {
+      title,
+      minutes,
+    };
+
+    await this.movieRepository.update(movieId, updatedMovie);
+
+    return true;
   }
 
   async delete(movieId: number) {
     await this.movieRepository.delete(movieId);
+
+    return true;
   }
 }
