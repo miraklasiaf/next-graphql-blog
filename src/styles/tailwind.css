@@ -1,0 +1,28 @@
+@import "tailwindcss/base";
+
+body {
+  @apply relative min-h-full min-w-xs antialiased leading-relaxed text-base font-sans text-gray-900 bg-white scroll-smooth direction-ltr font-setting-kern text-render-legibility;
+}
+
+@import "tailwindcss/components";
+@import "tailwindcss/utilities";
+
+.direction-ltr {
+  direction: ltr;
+}
+
+.scroll-smooth {
+  scroll-behavior: smooth;
+}
+
+.font-setting-kern {
+  font-feature-settings: "kern";
+}
+
+.text-render-legibility {
+  text-rendering: optimizeLegibility;
+}
+
+.text-mute {
+  @apply text-gray-300;
+}

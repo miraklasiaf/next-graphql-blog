@@ -5,12 +5,14 @@ export default function Header() {
   const { pathname } = useRouter();
 
   return (
-    <header>
+    <header className="flex justify-between text-xl py-3 mb-3">
       <Link href="/">
         <a className={pathname === "/" ? "is-active" : ""}>Home</a>
       </Link>
-      <Link href="/about">
-        <a className={pathname === "/about" ? "is-active" : ""}>About</a>
+      <Link href="/api/graphql">
+        <a className={pathname === "/about" ? "is-active" : ""}>
+          GraphQL Playground
+        </a>
       </Link>
       <Link href="/client-only">
         <a className={pathname === "/client-only" ? "is-active" : ""}>
@@ -18,9 +20,6 @@ export default function Header() {
         </a>
       </Link>
       <style jsx>{`
-        header {
-          margin-bottom: 25px;
-        }
         a {
           font-size: 14px;
           margin-right: 15px;

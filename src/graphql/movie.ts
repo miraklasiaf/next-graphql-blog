@@ -1,6 +1,6 @@
 import gql from "graphql-tag";
 
-export const GET_ALL_MOVIE = gql`
+export const GET_MOVIES = gql`
   query GetMovies {
     movies {
       id
@@ -10,7 +10,7 @@ export const GET_ALL_MOVIE = gql`
   }
 `;
 
-export const GET_SINGLE_MOVIE = gql`
+export const GET_MOVIE = gql`
   query GetMovie($movieId: Int!) {
     movie(movieId: $movieId) {
       id
@@ -33,5 +33,11 @@ export const CREATE_MOVIE = gql`
 export const UPDATE_MOVIE = gql`
   mutation UpdateMovie($movieId: Int!, $title: String!, $minutes: Int!) {
     updateMovie(movieId: $movieId, title: $title, minutes: $minutes)
+  }
+`;
+
+export const DELETE_MOVIE = gql`
+  mutation DeleteMovie($movieId: Int!) {
+    deleteMovie(movieId: $movieId)
   }
 `;
